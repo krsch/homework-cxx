@@ -1,0 +1,5 @@
+cmake_minimum_required (VERSION 3.10)
+project (ISOGRAM)
+add_executable(isogram_test isogram.cpp isogram_test.cpp)
+enable_testing()
+add_test(isogram_test isogram_test)

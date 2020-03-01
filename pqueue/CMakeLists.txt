@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10.0)
+project(PRIORITY_QUEUE)
+set(CMAKE_CXX_STANDARD 17)
+add_executable(pqueue_test pqueue.cpp pqueue_test.cpp)
+enable_testing()
+add_test(pqueue_test pqueue_test)
