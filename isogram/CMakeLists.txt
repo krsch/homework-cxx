@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.10)
-project (ISOGRAM)
+project (ISOGRAM CXX)
 add_executable(isogram_test isogram.cpp isogram_test.cpp)
-enable_testing()
-add_test(isogram_test isogram_test)
+target_link_libraries(isogram_test PUBLIC Catch2::Catch2 default)
+catch_discover_tests(isogram_test)

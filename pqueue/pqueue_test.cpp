@@ -1,5 +1,4 @@
 #include "pqueue.hpp"
-#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
 TEST_CASE("simple tests") {
@@ -51,7 +50,7 @@ TEST_CASE("update_priority tests") {
 
 TEST_CASE("extract_min tests") {
     pqueue queue;
-    auto i3 = queue.insert(3, "third");
+    queue.insert(3, "third");
     auto i1 = queue.insert(1, "first");
     auto i2 = queue.insert(2, "second");
     queue.update_priority(i1, 4);
@@ -71,7 +70,7 @@ TEST_CASE("extract_min tests 2") {
     pqueue queue;
     auto i3 = queue.insert(3, "third");
     auto i1 = queue.insert(1, "first");
-    auto i2 = queue.insert(2, "second");
+    queue.insert(2, "second");
     queue.insert(4, "4");
     queue.insert(5, "5");
     queue.insert(6, "6");

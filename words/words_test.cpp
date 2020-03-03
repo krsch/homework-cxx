@@ -1,7 +1,6 @@
 #include "words.hpp"
 #include <initializer_list>
 #include <string>
-#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include <random>
 #include <sstream>
