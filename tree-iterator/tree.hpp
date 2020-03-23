@@ -4,13 +4,11 @@ struct tree_node {
   int value;
   tree_node *up = nullptr;
   std::unique_ptr<tree_node> left{}, right{};
-  int subtree_size = 1; // нужно будет для задания №2
 
   tree_node(int val) : value(val) {}
   tree_node(tree_node &&a, int val, tree_node &&b)
       : value(val), left(std::make_unique<tree_node>(std::move(a))),
-        right(std::make_unique<tree_node>(std::move(b))),
-        subtree_size(1 + left->subtree_size + right->subtree_size) {
+        right(std::make_unique<tree_node>(std::move(b))) {
     left->up = right->up = this;
   }
 };
