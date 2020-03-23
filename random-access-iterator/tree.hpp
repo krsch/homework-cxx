@@ -19,7 +19,8 @@ struct tree_node {
   tree_node(tree_node &&other) noexcept
       : value(other.value), up(other.up), left(std::move(other.left)),
         right(std::move(other.right)),
-        subtree_size(left->subtree_size + 1 + right->subtree_size) {
+        subtree_size((left ? left->subtree_size : 0) + 1 +
+                     (right ? right->subtree_size : 0)) {
     assert(up == nullptr);
     if (left) left->up = this;
     if (right) right->up = this;
