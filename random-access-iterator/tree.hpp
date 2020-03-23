@@ -13,8 +13,7 @@ struct tree_node {
   tree_node(tree_node &&a, int val, tree_node &&b)
       : value(val), left(std::make_unique<tree_node>(std::move(a))),
         right(std::make_unique<tree_node>(std::move(b))),
-        subtree_size((left ? left->subtree_size : 0) + 1 + 
-                     (right ? right->subtree_size : 0)) {
+        subtree_size(left->subtree_size + 1 + right->subtree_size) {
     left->up = right->up = this;
   }
   tree_node(tree_node &&other) noexcept
