@@ -1,4 +1,5 @@
 #include <memory>
+#include <cassert>
 
 struct tree_node {
   int value;
@@ -14,7 +15,9 @@ struct tree_node {
   tree_node(tree_node &&other) noexcept
       : value(other.value), up(other.up), left(std::move(other.left)),
         right(std::move(other.right)) {
-    left->up = right->up = this;
+    assert(up == nullptr);
+    if (left) left->up = this;
+    if (right) right->up = this;
   }
   tree_node(tree_node const&) = delete;
   tree_node& operator=(tree_node const&) = delete;
