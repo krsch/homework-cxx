@@ -5,17 +5,27 @@ struct tree_node {
   tree_node *up = nullptr;
   std::unique_ptr<tree_node> left{}, right{};
 
-  tree_node(int val) : value(val) {}
+  tree_node(int val) noexcept : value(val) {}
   tree_node(tree_node &&a, int val, tree_node &&b)
       : value(val), left(std::make_unique<tree_node>(std::move(a))),
         right(std::make_unique<tree_node>(std::move(b))) {
     left->up = right->up = this;
   }
+  tree_node(tree_node &&other) noexcept
+      : value(other.value), up(other.up), left(std::move(other.left)),
+        right(std::move(other.right)) {
+    left->up = right->up = this;
+  }
+  tree_node(tree_node const&) = delete;
+  tree_node& operator=(tree_node const&) = delete;
+  tree_node& operator=(tree_node &&) = delete;
+  ~tree_node() = default;
 };
 
 struct tree {
   std::unique_ptr<tree_node> root;
   struct iterator {
+    // Для того, чтобы реализовать end(), вам скорее всего понадобится ещё одно поле
     tree_node *p;
     iterator operator++(int); // post-increment
     iterator operator--(int); // post-decrement
