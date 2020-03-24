@@ -34,3 +34,9 @@ TEST_CASE("operator-"
     for (auto j = t.begin(); j != t.end(); ++j)
       CHECK(i - j == (*i) - (*j));
 }
+
+TEST_CASE("throws exception on illegal access request", "[random access]") {
+  tree t{{{1, 2, 3}, 4, {5, 6, {7, 8, {nil, 9, 10}}}}};
+  CHECK_THROWS_AS(t[10], std::out_of_range);
+  CHECK_THROWS_AS(t[-1], std::out_of_range);
+}
