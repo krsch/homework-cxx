@@ -62,9 +62,10 @@ struct tree {
       return it;
     }
     [[nodiscard]] int const &operator*() const { return p->value; }
-    // реализовать проверку на попытку получения элемента за пределами индексов дерева
+    // реализовать проверку на попытку получения элемента за пределами индексов
+    // дерева
     int const &at() const {
-      //if (index out of range condition)
+      // if (index out of range condition)
       //  throw std::out_of_range("index out of range");
       return p->value;
     }
@@ -117,18 +118,18 @@ struct tree {
     using iterator_category = std::random_access_iterator_tag;
   };
 
-explicit tree(tree_node &&a) : root(std::make_unique<tree_node>(std::move(a))) {
-  root->up = nullptr;
-}
-// И эти две функции тоже
-[[nodiscard]] iterator begin() const;
-[[nodiscard]] iterator end() const;
-// Эту функцию реализовать намного проще, чем operator+ и operator-
-// Можете для разминки реализовать её напрямую, а потом уже приступать к более
-// сложной части
-[[nodiscard]] int operator[](ptrdiff_t idx) const { return begin()[idx]; }
-int const &at(ptrdiff_t idx) const { return (begin() + idx).at(); };
-}
-;
+  explicit tree(tree_node &&a)
+      : root(std::make_unique<tree_node>(std::move(a))) {
+    root->up = nullptr;
+  }
+  // И эти две функции тоже
+  [[nodiscard]] iterator begin() const;
+  [[nodiscard]] iterator end() const;
+  // Эту функцию реализовать намного проще, чем operator+ и operator-
+  // Можете для разминки реализовать её напрямую, а потом уже приступать к более
+  // сложной части
+  [[nodiscard]] int operator[](ptrdiff_t idx) const { return begin()[idx]; }
+  int const &at(ptrdiff_t idx) const { return (begin() + idx).at(); };
+};
 
 constexpr tree_node::nullptr_node nil{};
