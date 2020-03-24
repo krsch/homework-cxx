@@ -10,6 +10,20 @@ struct tree_node {
   int subtree_size = 1;
 
   tree_node(int val) : value(val) {}
+ #define nil tree_node::nullptr_node()
+  struct nullptr_node {};
+  tree_node(nullptr_node, int val, tree_node &&b)
+      : value(val), 
+        left(nullptr),
+        right(std::make_unique<tree_node>(std::move(b))) {
+    right->up = this;
+  }
+  tree_node(tree_node &&a, int val, nullptr_node)
+      : value(val), 
+        left(std::make_unique<tree_node>(std::move(a))),
+        right(nullptr) {
+    left->up = this;
+  }
   tree_node(tree_node &&a, int val, tree_node &&b)
       : value(val), left(std::make_unique<tree_node>(std::move(a))),
         right(std::make_unique<tree_node>(std::move(b))),
