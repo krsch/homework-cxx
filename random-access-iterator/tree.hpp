@@ -9,7 +9,19 @@ struct tree_node {
   std::unique_ptr<tree_node> left{}, right{};
   int subtree_size = 1;
 
+  struct nullptr_node {};
+
   tree_node(int val) : value(val) {}
+  tree_node(nullptr_node, int val, tree_node &&b)
+      : value(val), left(nullptr),
+        right(std::make_unique<tree_node>(std::move(b))) {
+    right->up = this;
+  }
+  tree_node(tree_node &&a, int val, nullptr_node)
+      : value(val), left(std::make_unique<tree_node>(std::move(a))),
+        right(nullptr) {
+    left->up = this;
+  }
   tree_node(tree_node &&a, int val, tree_node &&b)
       : value(val), left(std::make_unique<tree_node>(std::move(a))),
         right(std::make_unique<tree_node>(std::move(b))),
@@ -22,12 +34,14 @@ struct tree_node {
         subtree_size((left ? left->subtree_size : 0) + 1 +
                      (right ? right->subtree_size : 0)) {
     assert(up == nullptr);
-    if (left) left->up = this;
-    if (right) right->up = this;
+    if (left)
+      left->up = this;
+    if (right)
+      right->up = this;
   }
-  tree_node(tree_node const&) = delete;
-  tree_node& operator=(tree_node const&) = delete;
-  tree_node& operator=(tree_node &&) = delete;
+  tree_node(tree_node const &) = delete;
+  tree_node &operator=(tree_node const &) = delete;
+  tree_node &operator=(tree_node &&) = delete;
   ~tree_node() = default;
 };
 
@@ -48,6 +62,14 @@ struct tree {
       return it;
     }
     [[nodiscard]] int const &operator*() const { return p->value; }
+    // реализовать проверку на попытку получения элемента за пределами индексов
+    // дерева
+    int const &at() const {
+      // if (index out of range condition)
+      //  throw std::out_of_range("index out of range");
+      return p->value;
+    }
+
     [[nodiscard]] int const *operator->() const { return &p->value; }
     [[nodiscard]] friend bool operator==(iterator const &a, iterator const &b) {
       return a.p == b.p;
@@ -67,15 +89,19 @@ struct tree {
     [[nodiscard]] friend bool operator>=(iterator const &a, iterator const &b) {
       return a - b >= 0;
     }
-    [[nodiscard]] friend iterator operator-(iterator const &it, ptrdiff_t diff) {
+    [[nodiscard]] friend iterator operator-(iterator const &it,
+                                            ptrdiff_t diff) {
       return it + (-diff);
     }
-    [[nodiscard]] int const &operator[](ptrdiff_t idx) const { return *(*this + idx); }
+    [[nodiscard]] int const &operator[](ptrdiff_t idx) const {
+      return *(*this + idx);
+    }
     iterator &operator+=(ptrdiff_t diff) { return *this = *this + diff; }
     iterator &operator-=(ptrdiff_t diff) { return *this = *this - diff; }
     iterator &operator++() { return *this += 1; } // pre-increment
     iterator &operator--() { return *this -= 1; } // pre-decrement
-    [[nodiscard]] friend iterator operator+(ptrdiff_t diff, iterator const &self) {
+    [[nodiscard]] friend iterator operator+(ptrdiff_t diff,
+                                            iterator const &self) {
       return self + diff;
     }
     // Это всё нужно реализовать
@@ -102,7 +128,8 @@ struct tree {
   // Эту функцию реализовать намного проще, чем operator+ и operator-
   // Можете для разминки реализовать её напрямую, а потом уже приступать к более
   // сложной части
-  [[nodiscard]] int operator[](ptrdiff_t idx) const {
-    return begin()[idx];
-  }
+  [[nodiscard]] int operator[](ptrdiff_t idx) const { return begin()[idx]; }
+  int const &at(ptrdiff_t idx) const { return (begin() + idx).at(); };
 };
+
+constexpr tree_node::nullptr_node nil{};
