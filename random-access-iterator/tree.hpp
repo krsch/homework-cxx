@@ -61,8 +61,16 @@ struct tree {
       --*this;
       return it;
     }
-    [[nodiscard]] int const &operator*() const { return p->value; }
-    [[nodiscard]] int const *operator->() const { return &p->value; }
+    [[nodiscard]] int const &operator*() const {
+      if (0) // index out of range condition
+        throw std::out_of_range("index out of range");
+      return p->value; 
+    }
+    [[nodiscard]] int const *operator->() const { 
+      if (0) // index out of range condition
+        throw std::out_of_range("index out of range");
+      return &p->value;
+    }
     [[nodiscard]] friend bool operator==(iterator const &a, iterator const &b) {
       return a.p == b.p;
     }
