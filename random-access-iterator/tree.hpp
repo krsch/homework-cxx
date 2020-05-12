@@ -64,7 +64,7 @@ struct tree {
     [[nodiscard]] int const &operator*() const { return p->value; }
     // реализовать проверку на попытку получения элемента за пределами индексов
     // дерева
-    int const &at() const {
+    [[nodiscard]] int const &at() const {
       // if (index out of range condition)
       //  throw std::out_of_range("index out of range");
       return p->value;
@@ -129,7 +129,7 @@ struct tree {
   // Можете для разминки реализовать её напрямую, а потом уже приступать к более
   // сложной части
   [[nodiscard]] int operator[](ptrdiff_t idx) const { return begin()[idx]; }
-  int const &at(ptrdiff_t idx) const { return (begin() + idx).at(); };
+  [[nodiscard]] int const &at(ptrdiff_t idx) const { return (begin() + idx).at(); };
 };
 
 constexpr tree_node::nullptr_node nil{};
