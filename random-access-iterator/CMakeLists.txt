@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(random-access-iterator CXX)
-add_executable(random-access tree.cpp test.cpp)
-target_link_libraries(random-access PUBLIC Catch2::Catch2 default)
-catch_discover_tests(random-access TEST_PREFIX random::)
+add_executable(random-access_test tree.cpp test.cpp)
+target_link_libraries(random-access_test PUBLIC Catch2::Catch2 default)
+catch_discover_tests(random-access_test TEST_PREFIX random::)
