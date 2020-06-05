@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(tree CXX)
-add_executable(tree_test tree.cpp tree_test.cpp)
-target_link_libraries(tree_test PUBLIC Catch2::Catch2 default)
-catch_discover_tests(tree_test TEST_PREFIX tree::)
+include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
+auto_tester(tree tree.cpp tree_test.cpp)

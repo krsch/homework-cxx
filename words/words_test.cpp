@@ -1,7 +1,7 @@
-#include "words.hpp"
+#include <words.hpp>
 #include <initializer_list>
 #include <string>
-#include "catch.hpp"
+#include <catch.hpp>
 #include <random>
 #include <sstream>
 #include <type_traits>

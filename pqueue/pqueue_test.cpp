@@ -1,5 +1,5 @@
-#include "pqueue.hpp"
-#include "catch.hpp"
+#include <pqueue.hpp>
+#include <catch.hpp>
 
 TEST_CASE("simple tests") {
     pqueue queue;
