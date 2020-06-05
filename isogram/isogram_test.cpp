@@ -1,5 +1,5 @@
-#include "catch.hpp"
-#include "isogram.hpp"
+#include <catch.hpp>
+#include <isogram.hpp>
 
 TEST_CASE("Empty String") {
   REQUIRE(is_isogram("") == true);
