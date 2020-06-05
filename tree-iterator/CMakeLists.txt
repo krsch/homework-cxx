@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(tree-iterator CXX)
-add_executable(iterator_test tree.cpp test.cpp)
-target_link_libraries(iterator_test PUBLIC Catch2::Catch2 default)
-catch_discover_tests(iterator_test TEST_PREFIX iterator::)
+include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
+auto_tester(iterator iterator.cpp iterator_test.cpp)

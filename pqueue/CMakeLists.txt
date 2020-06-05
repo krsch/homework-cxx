@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(PRIORITY_QUEUE CXX)
-add_executable(pqueue_test pqueue.cpp pqueue_test.cpp)
-target_link_libraries(pqueue_test PUBLIC Catch2::Catch2 default)
-catch_discover_tests(pqueue_test TEST_PREFIX pqueue::)
+include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
+auto_tester(pqueue pqueue.cpp pqueue_test.cpp)
