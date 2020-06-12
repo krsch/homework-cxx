@@ -12,7 +12,7 @@ include(cmake/CompilerWarnings.cmake)
 set_project_warnings(default)
 
 enable_testing()
-add_subdirectory(external/catch2)
+add_subdirectory(external/doctest)
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     add_subdirectory(tree)
     add_subdirectory(tree-iterator)

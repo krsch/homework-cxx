@@ -1,7 +1,8 @@
 #include <tree.hpp>
 #include <catch.hpp>
+#include <algorithm>
 
-TEST_CASE("can iterate", "[iterator]") {
+TEST_CASE("can iterate") {
   tree t{{{1, 2, 3}, 4, {5, 6, 7}}};
   int v = 1;
   for (int i : t) {
@@ -10,7 +11,7 @@ TEST_CASE("can iterate", "[iterator]") {
   REQUIRE(v == 8);
 }
 
-TEST_CASE("can reverse iterate", "[iterator]") {
+TEST_CASE("can reverse iterate") {
   tree t{{{1, 2, 3}, 4, {5, 6, 7}}};
   int v = 7;
   std::for_each(std::make_reverse_iterator(t.end()),
