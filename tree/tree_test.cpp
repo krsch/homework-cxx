@@ -1,6 +1,7 @@
 #include <catch.hpp>
 #include <tree.hpp>
 #include <numeric>
+#include <vector>
 
 
 void check_tree(tree_node const &t) {
