@@ -85,7 +85,7 @@ TEST_CASE("Finds many different words") {
   }
   auto const result = count_words(str.str());
   for (auto const &[word, count] : result) {
-    INFO("checking " << word);
+    /* INFO("checking " << word); */
     CHECK(count == 1);
   }
   REQUIRE(result.size() == N);
