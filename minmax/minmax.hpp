@@ -1,4 +1,4 @@
 #include <utility>
 #include <vector>
 
-extern std::pair<int, int> minmax(std::vector<int> const &input);
+extern auto minmax(std::vector<int> const &input) -> std::pair<int, int>;
