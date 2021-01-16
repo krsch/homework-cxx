@@ -9,7 +9,8 @@ int main() {
     std::istringstream ss(s);
 
     std::vector<std::pair<int, int>> input;
-    int i, j;
+    int i;
+    int j;
     while (ss >> i && ss >> j)
         input.emplace_back(i, j);
     auto [min, max] = max_product(input);
