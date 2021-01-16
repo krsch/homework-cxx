@@ -1,4 +1,4 @@
 cmake_minimum_required (VERSION 3.10)
-project(ISOGRAM CXX)
+project(MINMAX CXX)
 include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
-auto_tester(isogram isogram.cpp isogram_test.cpp)
+auto_tester(minmax minmax.cpp minmax_test.cpp)
