@@ -1,0 +1,6 @@
+cmake_minimum_required (VERSION 3.10)
+project(MAX_PRODUCT CXX)
+include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
+auto_tester(max-product solution.cpp test.cpp)
+add_executable(max-product solution.cpp main.cpp)
+target_link_libraries(max-product default)
