@@ -1,7 +1,7 @@
 enable_testing()
 function(auto_tester NAME SOLUTION TEST)
     # include(${CMAKE_CURRENT_FUNCTION_LIST_DIR}/Catch.cmake)
-    include(${CMAKE_CURRENT_FUNCTION_LIST_DIR}/CompilerWarnings.cmake)
+    # include(${CMAKE_CURRENT_FUNCTION_LIST_DIR}/CompilerWarnings.cmake)
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_CXX_EXTENSIONS OFF)
     if(NOT TARGET default)
