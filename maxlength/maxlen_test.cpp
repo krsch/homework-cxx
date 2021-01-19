@@ -9,6 +9,7 @@ template <> struct StringMaker<std::pair<int, int>> {
     }
 };
 } // namespace doctest
+
 TEST_CASE("Single") { REQUIRE(maxlen({1}) == 1); }
 TEST_CASE("Reverse") { REQUIRE(maxlen({3, 2, 1}) == 1); }
 TEST_CASE("Long") { REQUIRE(maxlen({1, 1, 1, 1, 2, 3, 4}) == 4); }
