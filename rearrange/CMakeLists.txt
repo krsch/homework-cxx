@@ -1,0 +1,6 @@
+cmake_minimum_required (VERSION 3.10)
+project(REARRANGE CXX)
+include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
+auto_tester(rearrange rearrange.cpp rearrange_test.cpp)
+add_executable(rearrange rearrange.cpp main.cpp)
+target_link_libraries(rearrange default)
