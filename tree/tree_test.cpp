@@ -147,3 +147,20 @@ TEST_CASE("insert, remove then insert again "
     REQUIRE(r->value == val);
   }
 }
+
+TEST_CASE("insert and remove magic values") {
+  tree t;
+  t.insert(5);
+  t.insert(3);
+  t.insert(7);
+  t.insert(1);
+  t.insert(4);
+  t.insert(2);
+  check_tree(*t.root);
+  /* CHECK(tree_to_vector(t) == std::vector{1, 2, 3, 4, 5, 7}); */
+  REQUIRE(t.remove(3));
+  /* CHECK(tree_to_vector(t) == std::vector{1, 2, 4, 5, 7}); */
+  CHECK(t.remove(5));
+  /* CHECK(tree_to_vector(t) == std::vector{1, 2, 4, 7}); */
+  CHECK(t.root);
+}
